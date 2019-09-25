@@ -1,8 +1,11 @@
 public class Converter {
     public static void main(String[] args) {
-        String number = "000000000";
-        int a = 2;
-        convertToDecimal(noZeros(number), a);
+        String number = "01222121";
+        int a = 3;
+        int b = 36;
+        long numberInDecimal = convertFromAToDecimal(noZeros(number), a , b);
+        String result = convertToBNumeralSystem(numberInDecimal, b);
+        System.out.println(result);
     }
 
     public static String noZeros(String number){
@@ -14,12 +17,11 @@ public class Converter {
             }
         }
         return number.substring(i, number.length());
-
     }
 
-    public static void convertToDecimal(String number, int a){
+    public static long convertFromAToDecimal(String number, int a, int b){
+        long result = 0;
         if(a <= 10) {
-            long result = 0;
             int j = number.length() - 1;
             for (int i = number.length() - 1; i >= 0; i--) {
                 int element = Integer.parseInt(number.substring(i, i + 1));
@@ -27,7 +29,6 @@ public class Converter {
             }
             System.out.println(result);
         }else{
-            long result = 0;
             int j = number.length() - 1;
             for (int i = number.length() - 1; i >= 0; i--) {
                 char checkElement = number.charAt(i);
@@ -37,14 +38,37 @@ public class Converter {
                 }else{
                     element = Integer.parseInt(number.substring(i, i + 1));
                 }
-                result = result + element * (long) (Math.pow(a, j - i));
+                result = result + element * (long)(Math.pow(a, j - i));
             }
             System.out.println(result);
         }
+        return result;
+    }
+
+    public static String convertToBNumeralSystem(long numberInDecimal, int b){
+        StringBuffer sb = new StringBuffer();
+        long n = numberInDecimal;
+        long q = b;
+        while(n >= 1){
+            long r = n % b;
+            q = n / b;
+            if(r >= 10){
+                sb.append(numberToLetter(r));
+                n = q;
+                continue;
+            }else{
+                sb.append(r);
+                n = q;
+            }
+        }
+        return sb.reverse().toString();
     }
 
     public static int letterToNumber(char letter){
         return letter - 87;
+    }
 
+    public static char numberToLetter(long number){
+        return (char)(number + 87);
     }
 }
