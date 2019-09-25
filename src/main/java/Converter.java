@@ -1,11 +1,30 @@
+
 public class Converter {
-    public static void main(String[] args) {
-        String number = "01222121";
-        int a = 3;
-        int b = 36;
+    public static void main(String[] args) throws OverFlowException, InputException {
+        String number = "aaab";
+        int a = 11;
+        int b = 10;
+        checkForCorrectness(number, a);
         long numberInDecimal = convertFromAToDecimal(noZeros(number), a , b);
         String result = convertToBNumeralSystem(numberInDecimal, b);
         System.out.println(result);
+    }
+
+    public static void checkForCorrectness (String number, int a) throws InputException{
+        char[] n = number.toCharArray();
+        if(a <= 10) {
+            for (int i = 0; i < n.length; i++) {
+                if((int)n[i] < 48 || (int)n[i] > (48 + a - 1)){
+                    throw new InputException("Неверные входные данные");
+                }
+            }
+        }else{
+            for (int i = 0; i < n.length; i++) {
+                if((int)n[i] < 48 || ((int)n[i] > 57 && (int)n[i] < 97) || (int)n[i] > 97 + (a - 10) - 1){
+                    throw new InputException("Неверные входные данные");
+                }
+            }
+        }
     }
 
     public static String noZeros(String number){
@@ -19,13 +38,16 @@ public class Converter {
         return number.substring(i, number.length());
     }
 
-    public static long convertFromAToDecimal(String number, int a, int b){
+    public static long convertFromAToDecimal(String number, int a, int b) throws OverFlowException{
         long result = 0;
         if(a <= 10) {
             int j = number.length() - 1;
             for (int i = number.length() - 1; i >= 0; i--) {
                 int element = Integer.parseInt(number.substring(i, i + 1));
                 result = result + element * (long) (Math.pow(a, j - i));
+                if(result < 0){
+                    throw new OverFlowException("Произошло переполение типа long");
+                }
             }
             System.out.println(result);
         }else{
@@ -39,6 +61,9 @@ public class Converter {
                     element = Integer.parseInt(number.substring(i, i + 1));
                 }
                 result = result + element * (long)(Math.pow(a, j - i));
+                if(result < 0){
+                    throw new OverFlowException("Произошло переполение типа long");
+                }
             }
             System.out.println(result);
         }
