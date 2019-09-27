@@ -1,13 +1,17 @@
+package ru.ncd;
 
 public class Converter {
     public static void main(String[] args) throws OverFlowException, InputException {
-        String number = "aaab";
-        int a = 11;
-        int b = 10;
-        checkForCorrectness(number, a);
-        long numberInDecimal = convertFromAToDecimal(noZeros(number), a , b);
-        String result = convertToBNumeralSystem(numberInDecimal, b);
+        String result = countResult("123", 10, 10);
         System.out.println(result);
+    }
+
+    public static String countResult(String number, int a, int b) throws OverFlowException, InputException{
+        number = noZeros(number);
+        checkForCorrectness(number, a);
+        long numberInDecimal = convertFromAToDecimal(number, a , b);
+        String result = convertToBNumeralSystem(numberInDecimal, b);
+        return result;
     }
 
     public static void checkForCorrectness (String number, int a) throws InputException{
@@ -39,6 +43,7 @@ public class Converter {
     }
 
     public static long convertFromAToDecimal(String number, int a, int b) throws OverFlowException{
+
         long result = 0;
         if(a <= 10) {
             int j = number.length() - 1;
@@ -49,7 +54,6 @@ public class Converter {
                     throw new OverFlowException("Произошло переполение типа long");
                 }
             }
-            System.out.println(result);
         }else{
             int j = number.length() - 1;
             for (int i = number.length() - 1; i >= 0; i--) {
@@ -65,7 +69,6 @@ public class Converter {
                     throw new OverFlowException("Произошло переполение типа long");
                 }
             }
-            System.out.println(result);
         }
         return result;
     }
@@ -89,11 +92,11 @@ public class Converter {
         return sb.reverse().toString();
     }
 
-    public static int letterToNumber(char letter){
+    private static int letterToNumber(char letter){
         return letter - 87;
     }
 
-    public static char numberToLetter(long number){
+    private static char numberToLetter(long number){
         return (char)(number + 87);
     }
 }
