@@ -1,24 +1,24 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>ConverterNumeralSystem</title>
 </head>
 <body>
-<h1><b>Перевод чисел из одной системы счисления в другую онлайн</b></h1>
-<p><b>Число:</b><br>
+<h1><b>Conversion of numbers between numeral systems</b></h1>
+<p><b>Number:</b><br>
     <input type="text" value="${number}" size="40">
 </p>
-<p><b>Его система счисления:</b><br>
+<p><b>Input base:</b><br>
     <input type="text" value="${a}" size="40">
 </p>
-<p><b>Перевестиfgfgf в:</b><br>
+<p><b>Target base:</b><br>
     <input type="text" value="${b}" size="40">
 </p>
-<p><b>Результат:</b><br>
+<p><b>Result:</b><br>
     <input type="text" value="${result}" size="40">
 </p>
+<p><button type="submit" id="btn_convert">Calculate</button></p>
+
 
 </body>
 </html>

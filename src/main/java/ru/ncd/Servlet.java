@@ -24,7 +24,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
             servletContext.setAttribute("a", a);
             servletContext.setAttribute("b", b);
             servletContext.setAttribute("result", result);
-            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/resultPage.jsp");
+            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/mainPage.jsp");
             requestDispatcher.forward(request, response);
         }catch(Exception e){
             System.out.println(121212);
