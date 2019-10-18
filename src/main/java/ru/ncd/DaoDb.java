@@ -1,12 +1,17 @@
 package ru.ncd;
-
 import java.sql.*;
 
 public class DaoDb {
 
+    DataModel dm;
+
+    DaoDb(DataModel dm){
+        this.dm = dm;
+    }
+
  //   private static final String SQL_INSERT = "INSERT INTO table () VALUES (?, ?, ?, ?, ?)";
 
-    public void save(DataModel dm){
+    public void save(){
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:~/test";
         final String USER = "sa";

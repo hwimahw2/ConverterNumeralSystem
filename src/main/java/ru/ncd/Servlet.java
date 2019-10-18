@@ -41,8 +41,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
             int b = Integer.parseInt(request.getParameter("b"));
             String result = Converter.countResult(number, a, b);
             DataModel dataModel = new DataModel(number, a, b, result);
-            DaoDb daoDb = new DaoDb();
-            daoDb.save(dataModel);
+            DaoDb daoDb = new DaoDb(dataModel);
+            daoDb.save();
             pw.print(dataModel.toJson().toString());
         } catch (OverFlowException e) {
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/overFlowExceptionPage.jsp");
