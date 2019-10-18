@@ -1,5 +1,8 @@
 package ru.ncd;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 public class DataModel {
 
     private String number;
@@ -47,5 +50,21 @@ public class DataModel {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public JSONObject toJson() {
+        JSONObject mainJson = new JSONObject();
+        JSONObject json = new JSONObject();
+        JSONArray rows = new JSONArray();
+        JSONArray data = new JSONArray();
+        data.element(this.number);
+        data.element(this.a);
+        data.element(this.b);
+        data.element(this.result);
+        json.element("id", 1);
+        json.element("data", data);
+        rows.element(json);
+        mainJson.element("rows", rows);
+        return mainJson;
     }
 }

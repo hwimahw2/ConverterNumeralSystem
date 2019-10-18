@@ -3,11 +3,11 @@ package ru.ncd;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Servlet extends javax.servlet.http.HttpServlet {
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         try {
-
             String number = request.getParameter("number");
             int a = Integer.parseInt(request.getParameter("a"));
             int b = Integer.parseInt(request.getParameter("b"));
@@ -35,11 +35,15 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         try {
+            PrintWriter pw = response.getWriter();
             String number = request.getParameter("number");
             int a = Integer.parseInt(request.getParameter("a"));
             int b = Integer.parseInt(request.getParameter("b"));
             String result = Converter.countResult(number, a, b);
-            DataModel dm = new DataModel(number, a, b, result);
+            DataModel dataModel = new DataModel(number, a, b, result);
+            DaoDb daoDb = new DaoDb();
+            daoDb.save(dataModel);
+            pw.print(dataModel.toJson().toString());
         } catch (OverFlowException e) {
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/overFlowExceptionPage.jsp");
             requestDispatcher.forward(request, response);
