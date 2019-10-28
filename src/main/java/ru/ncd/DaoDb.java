@@ -1,4 +1,5 @@
 package ru.ncd;
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class DaoDb {
@@ -8,8 +9,6 @@ public class DaoDb {
     DaoDb(DataModel dm){
         this.dm = dm;
     }
-
- //   private static final String SQL_INSERT = "INSERT INTO table () VALUES (?, ?, ?, ?, ?)";
 
     public void save(){
         final String JDBC_DRIVER = "org.h2.Driver";
